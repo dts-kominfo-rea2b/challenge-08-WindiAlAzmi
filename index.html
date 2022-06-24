@@ -5,37 +5,123 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Challenge - DOM</title>
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+      #app {
+        background-color: lightgray;
+        margin: 0 auto;
+        margin-top: 6vh;
+        width: 50vw;
+        padding: 10px;
+        border-radius: 10px;
+        border: 1px solid black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+      }
+      #todo-title {
+        background-color: lightgreen;
+        padding: 4px;
+        font-weight: bold;
+        font-size: 20px;
+      }
+      #todo-subtitle {
+        font-size: 12px;
+      }
+      .input-section {
+        display: flex;
+        flex-direction: row;
+        justify-content: center;
+        background-color: lightpink;
+        gap: 20px;
+      }
+      #todo-input {
+        height: 20px;
+      }
+      .output-section {
+        display: flex;
+        justify-items: center;
+
+        width: 100%;
+      }
+      #todo-output {
+        display: flex;
+        flex-direction: column;
+        justify-items: center;
+        width: 100%;
+        text-align: center;
+        gap: 4px;
+      }
+      .item-todo-input {
+        background-color: whitesmoke;
+        list-style: none;
+        margin-left: -40px;
+        border-radius: 10px;
+      }
+    </style>
   </head>
   <body>
     <div id="app">
       <!-- TODO: Buatlah sebuah header dengan id todo-title -->
+      <div id="todo-title">To-Do List</div>
       <!-- TODO: Buatlah sebuah subtitle dengan id todo-subtitle -->
+      <div id="todo-subtitle">-Today I need to-</div>
 
       <!-- Section: input -->
-      <!-- TODO: Buatlah sebuah input bertipe text dengan id todo-input -->
-      <!-- TODO: Buatlah sebuah button dengan id todo-submit -->
+      <div class="input-section">
+        <!-- TODO: Buatlah sebuah input bertipe text dengan id todo-input -->
+        <input type="text" id="todo-input" />
+        <!-- TODO: Buatlah sebuah button dengan id todo-submit -->
+        <button type="button" id="todo-submit">Submit</button>
+      </div>
 
       <!-- Section output -->
-      <!-- TODO: Buatlah sebuah <ul> dengan id todo-output -->
+      <div class="output-section">
+        <!-- TODO: Buatlah sebuah <ul> dengan id todo-output -->
+        <ul id="todo-output"></ul>
+      </div>
     </div>
 
     <!-- ! Untuk tantangan ini, script jangan diubah ke external js yah ! -->
     <script>
       // TODO: Deklarasi variable sesuai dengan kebutuhan di sini
-      let button;
-      let input;
-      let output;
+      let button = document.querySelector("#todo-submit");
+      let input = document.querySelector("#todo-input");
+      let output = document.querySelector("#todo-output");
+      console.log(output);
 
       // TODO: Buatlah sebuah fungsi dengan nama fnClickHandler
       // Fungsi yang digunakan untuk menambahkan tulisan
       // Jangan ubah cara deklarasi fungsinya, cukup isi saja
-      function fnClickHandler(toDoItem) {}
+      function fnClickHandler(toDoItem) {
+        let li = document.createElement("li");
+        li.textContent = toDoItem;
+        li.className = "item-todo-input";
+        return li;
+      }
 
       // TODO: register event onclick / addEventListener untuk button
       // akan menjalankan fungsi fnClickHandler
-      
+      button.addEventListener("click", event => {
+        let isi = input.value;
+        const nodes = fnClickHandler(isi);
+        output.append(nodes);
+        console.log(nodes);
+      });
+
       // TODO: register event onkeypress / addEventListener untuk input
       // sehingga saat di input ditekan enter akan menjalankan fungsi fnClickHandler juga
+      input.addEventListener("keypress", event => {
+        if (event.key === "Enter") {
+          let isi = input.value;
+          const nodes = fnClickHandler(isi);
+          output.append(nodes);
+          console.log(nodes);
+        }
+      });
     </script>
   </body>
 </html>
